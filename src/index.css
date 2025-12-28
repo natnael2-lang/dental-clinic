@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+
+
+
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-card: hsl(var(--card));
+
+  --color-primary: hsl(var(--primary));
+  --color-secondary: hsl(var(--secondary));
+  --color-accent: hsl(var(--accent));
+
+  --color-muted-foreground: hsl(var(--muted-foreground));
+}
+
+/* =========================================================
+   2️⃣ Light theme values (runtime)
+   ========================================================= */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 230 41% 9%;
+
+  --card: 0 0% 100%;
+
+  --primary:222 56% 47%;
+  --secondary: 210 40% 96%;
+  --accent: 34 54% 48%;
+
+  --muted-foreground: 240 5% 45%;
+  --primary-foreground:0 100% 0%;
+ 
+}
+
+/* =========================================================
+   3️⃣ Dark theme values
+   ========================================================= */
+.dark {
+  --background: 240 10% 4%;
+  --foreground: 220 15% 15%;
+
+  --card: 240 10% 8%;
+
+  --primary: 200 90% 60%;
+  --secondary: 240 10% 15%;
+  --accent: 160 70% 55%;
+
+  --muted-foreground: 220 10% 45%;
+
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+@layer utilities {
+  .animate-fadeIn {
+    animation: fadeIn 0.7s ease-out forwards;
+  }
+  .animate-fade-up {
+    animation: fade-up 0.7s ease-out forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slide-in-left 0.7s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.7s ease-out forwards;
+  }
+  .card {
+    @apply bg-card rounded-2xl p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl;
+  }
+}
