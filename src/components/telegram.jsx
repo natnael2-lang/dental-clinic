@@ -1,50 +1,81 @@
 import { useState } from "react";
-import { Send, MessageCircle } from "lucide-react";
+import { Send, MessageCircle, X } from "lucide-react";
 
 export default function TelegramChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
 
-  const telegramUsername = "@Rina12nari"; 
+  // ✅ IMPORTANT: username WITHOUT @
+  const telegramUsername = "Rina12nari";
 
-  const sendMessage = () => {
-    if (!message) return;
-    const url = `https://t.me/${telegramUsername}?text=${encodeURIComponent(
-      message
-    )}`;
-    window.open(url, "_blank");
-    setMessage("");
+  const openTelegram = () => {
+    // Telegram only supports opening the chat
+    window.open(`https://t.me/${telegramUsername}`, "_blank");
   };
 
   return (
     <>
-      {/* Fixed button */}
+      {/* Floating Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-5 right-5 z-50 bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-full shadow-lg flex items-center justify-center"
+        className="
+          fixed bottom-6 right-6 z-50
+          bg-[#229ED9] hover:bg-[#1c8cc5]
+          text-white p-4 rounded-full
+          shadow-2xl transition-all
+        "
       >
         <MessageCircle className="w-6 h-6" />
       </button>
 
-      {/* Chat box */}
+      {/* Chat Box */}
       {isOpen && (
-        <div className="fixed bottom-20 right-5 z-50 w-80 bg-white rounded-xl shadow-xl border border-gray-200 flex flex-col">
-          <div className="p-4 font-semibold text-gray-800 border-b border-gray-200">
-            Chat on Telegram
+        <div
+          className="
+            fixed bottom-24 right-6 z-50
+            w-80 bg-white rounded-2xl
+            shadow-2xl border
+            flex flex-col overflow-hidden
+          "
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between px-4 py-3 bg-[#229ED9] text-white">
+            <span className="font-semibold">Chat on Telegram</span>
+            <button onClick={() => setIsOpen(false)}>
+              <X className="w-4 h-4" />
+            </button>
           </div>
 
+          {/* Message Input */}
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Type your message..."
-            className="p-3 flex-1 resize-none border-none focus:ring-0 outline-none text-sm"
+            placeholder="Type your message here…"
+            className="
+              p-3 h-24 resize-none text-sm
+              outline-none border-none
+            "
           />
 
+          {/* Info */}
+          <div className="px-3 text-xs text-gray-500">
+            Telegram doesn’t support auto-sending messages.
+            Your message will open in Telegram.
+          </div>
+
+          {/* Send Button */}
           <button
-            onClick={sendMessage}
-            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-b-xl flex items-center justify-center gap-2"
+            onClick={openTelegram}
+            className="
+              mt-2 mx-3 mb-3
+              bg-[#229ED9] hover:bg-[#1c8cc5]
+              text-white py-2 rounded-full
+              flex items-center justify-center gap-2
+              transition
+            "
           >
-            <Send className="w-4 h-4" /> Send
+            <Send className="w-4 h-4" />
+            Open Telegram
           </button>
         </div>
       )}
