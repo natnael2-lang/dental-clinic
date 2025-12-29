@@ -5,7 +5,7 @@ export default function TelegramChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
 
-  const telegramUsername = "@Amantad1"; 
+  const telegramUsername = "@Rina12nari"; 
 
   const sendMessage = () => {
     if (!message) return;
